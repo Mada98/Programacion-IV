@@ -5,12 +5,22 @@
 npm install
 
 # Ejecutar un ejercicio específico
-npx ts-node src/Ejercicio1.ts
-npx ts-node src/Ejercicio2.ts
-npx ts-node src/Ejercicio3.ts
-npx ts-node src/Ejercicio4.ts
-npx ts-node src/Ejercicio5.ts
+npm run eje1
+npm run eje2
+npm run eje3
+npm run eje4
+npm run eje5
 ```
+
+## Diagramas UML
+
+### Ejercicio 3 - Herencia y Polimorfismo
+
+![alt text](img/ejercicio3.png)
+
+### Ejercicio 5 - Diseño de UML propio
+
+![alt text](img/ejercicio5.png)
 
 ## Conceptos implementados
 
@@ -19,3 +29,9 @@ npx ts-node src/Ejercicio5.ts
 - **Polimorfismo**: Objetos de diferentes tipos tratados como el mismo tipo
 - **Clases Abstractas**: Clases base que no pueden instanciarse
 - **Encapsulación**: Atributos privados con getters/setters
+
+## Integrantes del grupo:
++ Mateo Avila Baez
++ Ramiro Gabeiras
++ Gino Robla Belleggia
++ Lautaro Carrio

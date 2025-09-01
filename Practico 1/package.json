@@ -5,7 +5,12 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "npx tsc --watch",
-    "dev": "node --watch ./dist/index.js"
+    "dev": "node --watch ./dist/index.js",
+    "eje1":"ts-node src/Ejercicio1.ts",
+    "eje2":"ts-node src/Ejercicio2.ts",
+    "eje3":"ts-node src/Ejercicio3.ts",
+    "eje4":"ts-node src/Ejercicio4.ts",
+    "eje5":"ts-node src/Ejercicio5.ts"
   },
   "keywords": [],
   "author": "",
@@ -13,6 +18,7 @@
   "description": "",
   "devDependencies": {
     "@types/node": "^24.3.0",
+    "ts-node": "^10.9.2",
     "typescript": "^5.9.2"
   }
 }

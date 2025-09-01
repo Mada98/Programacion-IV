@@ -1,45 +1,51 @@
 // Ejercicio 3: Herencia y Polimorfismo
-abstract class Empleado {
-    nombre: string;
-    salarioBase: number;
-
-    constructor(nombre: string, salarioBase: number) {
-        this.nombre = nombre;
-        this.salarioBase = salarioBase;
+export abstract class Empleado {
+    constructor(protected nombre:string, protected salarioBase:number) {
     }
-
     abstract calcularSalario(): number;
+    abstract getName(): string
 }
 
-class EmpleadoTiempoCompleto extends Empleado {
-    constructor(nombre: string, salarioBase: number) {
-        super(nombre, salarioBase);
+export class EmpleadoTiempoCompleto extends Empleado{
+    
+    private bono:number = 20000
+    
+    constructor(nombre:string, salarioBase:number){
+        super(nombre, salarioBase)
     }
 
+    getName(): string{
+        return this.nombre
+    }
+    
     calcularSalario(): number {
-        return this.salarioBase + 20000;
+        return this.salarioBase + this.bono
     }
 }
 
-class EmpleadoMedioTiempo extends Empleado {
-    constructor(nombre: string, salarioBase: number) {
-        super(nombre, salarioBase);
+export class EmpleadoMedioTiempo extends Empleado{
+    
+    constructor(nombre:string, salariobase:number){
+        super(nombre, salariobase)
     }
 
+    getName(): string{
+        return this.nombre
+    }
+    
     calcularSalario(): number {
-        return this.salarioBase * 0.5;
+        return this.salarioBase * 0.5
     }
 }
 
-// Prueba del Ejercicio 3 - Polimorfismo
-console.log("=== Ejercicio 3: Herencia y Polimorfismo ===");
-const empleados: Empleado[] = [
-    new EmpleadoTiempoCompleto("Juan Pérez", 50000),
-    new EmpleadoMedioTiempo("María González", 40000),
-    new EmpleadoTiempoCompleto("Carlos López", 60000),
-    new EmpleadoMedioTiempo("Ana Martínez", 45000)
-];
+const emp1 = new EmpleadoTiempoCompleto('Marcos', 1560000)
+const emp2 = new EmpleadoMedioTiempo('Lucas', 1560000)
+const emp3 = new EmpleadoMedioTiempo('Juan', 1870000)
+const emp4 = new EmpleadoTiempoCompleto('Amilcar', 1360000)
+const emp5 = new EmpleadoMedioTiempo('Alejo', 1360000)
 
-empleados.forEach(empleado => {
-    console.log(`${empleado.nombre}: Salario = $${empleado.calcularSalario()}`);
-});
+const empleados: Empleado[] = [emp1, emp2, emp3, emp4, emp5]
+
+for (const empleado of empleados) {
+    console.log(`El salario de ${empleado.getName()} es: ${empleado.calcularSalario()}`);
+}
