@@ -10,6 +10,10 @@ export default class ACTC {
     public getPilotos(): Piloto[] {
         return this.pilotosList
     }
+    //funcion para chequear tamaño de la lista
+    public getSize():number {
+        return this.pilotosList.length
+    }
 
     public getPilotoById(idF: number): Piloto | undefined {
         throw new Error('Funcion no implmentada')
