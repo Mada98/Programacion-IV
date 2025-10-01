@@ -17,7 +17,11 @@ export default class ACTC {
     }
 
     public getPilotoById(idF: number): Piloto | undefined {
-        throw new Error('Funcion no implmentada')
+        const piloto = this.pilotosList.find(p => p.id === idF)
+        if(!piloto){
+            return undefined
+        }
+        return piloto
     }
 
     public getPilotoByCategory(categ: category): Piloto[] | []{
