@@ -1,5 +1,6 @@
 import Piloto from "../models/PilotoInterface";
 import { category } from "../models/PilotoInterface";
+import { validCategories } from "../models/PilotoInterface";
 
 export default class ACTC {
 
@@ -24,6 +25,9 @@ export default class ACTC {
     }
     //parametros: id uso 'id_autoincremental' y activo siempre 'true' cuando se crea
     public addPiloto(newNombre: string, newMarca: string, newCategoria: category): Piloto {
+        if(!validCategories.includes(newCategoria)){
+            throw new Error
+        }
         const newPiloto:Piloto = { id: this.id_autoincremental++, nombre:newNombre, marca:newMarca, categoria:newCategoria, activo:true }
         this.pilotosList.push(newPiloto)
         return newPiloto

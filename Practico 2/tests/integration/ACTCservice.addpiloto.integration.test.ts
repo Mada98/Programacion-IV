@@ -17,5 +17,28 @@ describe('POST /actc/pilotos - validacioones', () => {
         expect(res.status).toBe(201)
         expect(res.body).toHaveProperty('id');
     })
+
+    it('POST /actc/pilotos - error (400) - faltan datos', async () => {
+        const res = await request(app)
+        .post('/actc/pilotos')
+        .send({
+            nombre:'Julian',
+            marca:'Ford'
+        })
+        expect(res.status).toBe(400)
+        expect(res.body).toHaveProperty('error');
+    })
+
+    it('POST /actc/pilotos - error (400) - categoria no existente', async () => {
+        const res = await request(app)
+        .post('/actc/pilotos')
+        .send({
+            nombre:'Julian',
+            marca:'Ford',
+            categoria:'TCPK789'
+        })
+        expect(res.status).toBe(400)
+        expect(res.body).toHaveProperty('error');
+    })
 })
 
