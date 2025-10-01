@@ -1,6 +1,7 @@
 import { Router } from "express";
 import z from "zod";
 import type ACTC from "../service/ACTCservice";
+import { number } from "zod/v4";
 
 const pilotoSchema = z.object({
     nombre: z.string().min(3),
@@ -10,6 +11,17 @@ const pilotoSchema = z.object({
 
 export function makeActcRouter(service:ACTC){
     const router = Router()
+
+    router.get('/:id', (req, res) => {
+        try{
+            const piloto = service.getPilotoById(Number(req.params.id))
+            if(!piloto) return res.status(404).json({error: 'Error: no existe un piloto con ese id'})
+            return res.status(200).json(piloto)
+        }catch(error){
+            return res.status(404).json({error: 'Error al buscar al piloto'})
+        }
+    })
+
 
     router.post('/', (req, res) => {
         const parse = pilotoSchema.safeParse(req.body)
