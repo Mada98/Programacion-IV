@@ -15,6 +15,7 @@ describe('POST /actc/pilotos - validacioones', () => {
             categoria:'TC'
         })
         expect(res.status).toBe(201)
+        expect(res.body).toHaveProperty('id');
     })
 })
 

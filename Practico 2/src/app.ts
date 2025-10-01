@@ -1,5 +1,7 @@
 import express from 'express';
 import cors from 'cors';
+import ACTC from './service/ACTCservice';
+import { makeActcRouter } from './routes/actc.route';
 
 class Server {
     public app: express.Application;
@@ -18,7 +20,8 @@ class Server {
         this.app.use( cors());
     }
     routes(){
-        // this.app.use("/products",productRouote)
+        const service = new ACTC()
+        this.app.use('/actc/pilotos', makeActcRouter(service))
     }
     start(callback: () => void) {
         this.app.listen(this.port, callback);
