@@ -23,8 +23,10 @@ export default class ACTC {
         throw new Error('Funcion no implmentada')
     }
     //parametros: id uso 'id_autoincremental' y activo siempre 'true' cuando se crea
-    public addPiloto(nombre: string, marca: string, categoria: category): Piloto {
-        throw new Error('Funcion no implmentada')
+    public addPiloto(newNombre: string, newMarca: string, newCategoria: category): Piloto {
+        const newPiloto:Piloto = { id: this.id_autoincremental++, nombre:newNombre, marca:newMarca, categoria:newCategoria, activo:true }
+        this.pilotosList.push(newPiloto)
+        return newPiloto
     }
 
     public deletePiloto(idF: number): boolean {
