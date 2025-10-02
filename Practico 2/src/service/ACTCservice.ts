@@ -25,7 +25,8 @@ export default class ACTC {
     }
 
     public getPilotoByCategory(categ: category): Piloto[] | []{
-        throw new Error('Funcion no implmentada')
+        const listaPilt = this.pilotosList.filter(p => p.categoria === categ)
+        return listaPilt
     }
     //parametros: id uso 'id_autoincremental' y activo siempre 'true' cuando se crea
     public addPiloto(newNombre: string, newMarca: string, newCategoria: category): Piloto {
