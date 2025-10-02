@@ -27,9 +27,9 @@ describe('GET /actc/pilotos/cat?categoria="" - validaciones', () => {
             marca: 'Renault',
             categoria: 'TC2000'
         })
-
+        const valor:string = 'TCPK'
         const get = await request(app)
-        .get('/actc/pilotos/cat?categoria=TCPK')
+        .get(`/actc/pilotos/cat?categoria=${valor}`)
 
         expect(get.status).toBe(200)
     })

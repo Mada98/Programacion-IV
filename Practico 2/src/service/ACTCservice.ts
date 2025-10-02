@@ -24,7 +24,7 @@ export default class ACTC {
         return piloto
     }
 
-    public getPilotoByCategory(categ: category): Piloto[] | []{
+    public getPilotoByCategory(categ: string): Piloto[] | []{
         const listaPilt = this.pilotosList.filter(p => p.categoria === categ)
         return listaPilt
     }
