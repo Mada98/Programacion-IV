@@ -27,7 +27,6 @@ describe('DELETE /actc/pilotos/:id - validaciones', () => {
         const delt = await request(app)
         .delete(`/actc/pilotos/${id}`)
         expect(delt.status).toBe(204)
-        expect(delt.body).toHaveProperty('message')
     })
 
     it('DELETE /actc/pilotos/:id - error (404)', async () => {

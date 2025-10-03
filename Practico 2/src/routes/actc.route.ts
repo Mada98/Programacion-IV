@@ -1,6 +1,7 @@
 import { Router } from "express";
 import z from "zod";
 import type ACTC from "../service/ACTCservice";
+import { error } from "console";
 
 const pilotoSchema = z.object({
     nombre: z.string().min(3),
@@ -49,6 +50,16 @@ export function makeActcRouter(service: ACTC) {
             return res.status(201).json(piloto)
         } catch (error) {
             return res.status(400).json({ error: 'Error al crear un piloto nuevo' })
+        }
+    })
+
+    router.delete('/:id', (req, res) => {
+        try{
+            const valor = service.deletePiloto(Number(req.params.id))
+            if(valor === false) return res.status(404).json({error: 'No se encontro un piloto con ese ID'})
+            return res.status(204).json({message: 'Piloto eliminado'})
+        }catch(error){
+            return res.status(400).json({error: 'Error al eliminar un piloto'})
         }
     })
 
