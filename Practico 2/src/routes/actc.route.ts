@@ -8,10 +8,18 @@ const pilotoSchema = z.object({
     categoria: z.string().min(2)
 })
 
+const categoriaSchema = z.object({
+    categoria: z.coerce.string().min(2)
+})
+
 export function makeActcRouter(service: ACTC) {
     const router = Router()
 
     router.get('/cat', (req, res) => {
+        const parse = categoriaSchema.safeParse(req.query)
+        if (!parse.success) {
+            return res.status(400).json({ error: 'validationError', detail: 'Faltan datos' })
+        }
         try {
             const listaPiloto = service.getPilotoByCategory(String(req.query.categoria))
             return res.status(200).json(listaPiloto)
