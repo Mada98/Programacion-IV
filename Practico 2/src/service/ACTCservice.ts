@@ -39,7 +39,10 @@ export default class ACTC {
     }
 
     public deletePiloto(idF: number): boolean {
-        throw new Error('Funcion no implmentada')
+        const idx = this.pilotosList.findIndex(b => b.id === idF);
+        if (idx === -1) return false;
+        this.pilotosList.splice(idx, 1);
+        return true;
     }
 
     public setActivo(idF: number, activo:boolean ): boolean {
