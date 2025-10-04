@@ -46,6 +46,10 @@ export default class ACTC {
     }
 
     public setActivo(idF: number, activo:boolean ): boolean {
-        throw new Error('Funcion no implmentada')
+        const piloto = this.pilotosList.find(p => p.id === idF)
+        if(!piloto) return false
+        piloto.activo = activo
+        return true
+        
     }
 }
