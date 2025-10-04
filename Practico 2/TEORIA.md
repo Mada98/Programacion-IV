@@ -39,7 +39,11 @@ Tanto **Parse()** como **safeParse()** son usados para validar datos ocn un esqu
 
 ## 6- Dé dos ejemplos de reglas de dominio que deben probarse con tests unitarios (no sólo validación de entrada).
 
+//Completo mañana @Rama
+
 ## 7- ¿Qué malos olores suele haber en suites de tests? Dé 3 ejemplos (naming, duplicación, asserts débiles, mocks frágiles, etc.).
+
+//Completo mañana @Rama
 
 ## 8- ¿Cómo trazará criterios de aceptación ↔ tests? Incluya un mini ejemplo de tabla con 2 filas.
 
