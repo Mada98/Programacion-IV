@@ -35,7 +35,7 @@ Tanto **Parse()** como **safeParse()** son usados para validar datos ocn un esqu
 
 **Parse()** lanza una excepcion. Si la validacion falla, detiene la ejecucion del programa tirando un error. Lo usaria dentro de un middleware de validacion antes de la ruta principal, ya que si lanza un error, el middleware de errores de express lo captura y podes responder con una respuesta HTTP 400 estandarizada.
 
-**safeParse()** este retorna un objeto, no una excepcion, se usa para verificar si la parte del codigo es un positivo o negativo. Este como se usaria dentro del controlador de la ruta ya que permite controlar el fluJo inmediatamente, por ejemplo si falla, el controlador puede responder sin depender de el middleware de errores.
+**safeParse()** retorna un objeto, no una excepcion, se usa para verificar si la parte del codigo es un positivo o negativo. Este como se usaria dentro del controlador de la ruta ya que permite controlar el fluJo inmediatamente, por ejemplo si falla, el controlador puede responder sin depender de el middleware de errores.
 
 ## 6- Dé dos ejemplos de reglas de dominio que deben probarse con tests unitarios (no sólo validación de entrada).
 
@@ -46,3 +46,5 @@ Tanto **Parse()** como **safeParse()** son usados para validar datos ocn un esqu
 //Completo mañana @Rama
 
 ## 9- ¿Por qué no perseguir 100% de cobertura a toda costa? Mencione
+
+No es necesario perseguir el 100% de covertura ya que generar pruebas para cada linea de codigo gasta mucho tiempo valioso. Muchas de las pruebas que se escribirian cubirian codigo que nunca falla o es innecesario, sacando tiempo a la generacion de casos de prueba en areas criticas del programa. Lo recomendable es apuntar a un porcentaje mas bajo pero con pruebas mas solidas y enfocadas en la logica del programa.
