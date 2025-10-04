@@ -13,6 +13,10 @@ const categoriaSchema = z.object({
     categoria: z.coerce.string().min(2)
 })
 
+const setActivoSchema = z.object({
+    activo: z.boolean()
+})
+
 export function makeActcRouter(service: ACTC) {
     const router = Router()
 
@@ -54,6 +58,10 @@ export function makeActcRouter(service: ACTC) {
     })
 
     router.put('/:id', (req, res) => {
+        const parse = setActivoSchema.safeParse(req.body)
+        if (!parse.success) {
+            return res.status(400).json({ error: 'validationError', detail: 'Faltan datos' })
+        }
         try{
             const { activo } = req.body
             const id = Number(req.params.id)
