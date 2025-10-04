@@ -14,3 +14,25 @@ Los **Test unitarios** prueban funcionalidades aisladas como pueden ser funcione
 En conclucion las diferencias mas notables entre estos tipos de testeo son la velocidad de ejecucion y el alcanze de las pruebas, esta relacion se puede ver de manera grafica en la piramide de pruebas
 
 ![Diagrama de flujo](imagenes/Piramide.png)
+
+## 3 ¿Qué es un doble de prueba? Defina mock, stub y spy y cuándo conviene cada cada uno.
+
+Los ***Dobles de prueba** son objetos que se usan en lugar de las dependencias reales durante las pruebas unitarias o de integracion, esto permite aislar las pruebas del entorno de desarrollo y simular los escenarios necesarios en pruebas controladas.
+
+Se le conoce como **Mock**  a un tipo de Dobles de prueba que testean funciones o clases aisladas, sin dependencias externas y se utilizan para verificar el comportamiento de una dependencia durante una prueba. Tienen la particularidad de que son rapidos y faciles de ejecutar. Este tipo de prueba conviene usarlo cuando se quiere verificar como interactua el codigo con una dependencia, no solo el resultado final.
+
+**Stub** es otro tipo de Doble de prueba en el cual los datos que le proporcionamos estan predefinidos, se usa para que devuelva una respuesta especifica y controlar los datos de entrada o salida de una dependencia, con la logia aislada del componente a probar. Este tipo de prueba conviene usarla cuando el codigo que se prueba necesita recibir datos especificos para su funcionalidad.
+
+Los Dobles de prueba **Spy** a diferencia de los otros utiliza la funcion original y registra el comportamiento de una dependencia durante una prueba, para poder verificar que funcione correctamente. Este tipo de prueba conviene usarla cuando necesitamos probar la logica real de una funcion y al mismo tiempo confirmar ciertos efectos resultantes de la ejecucion.
+
+## 4 ¿Por qué es útil separar app de server? Muestre (en 8–10 líneas) un ejemplo mínimo con makeApp() y un test de integración con Supertest.
+
+## 5 Zod: diferencia entre parse y safeParse. ¿Dónde usaría cada uno en una ruta Express y por qué?
+
+## 6 Dé dos ejemplos de reglas de dominio que deben probarse con tests unitarios (no sólo validación de entrada).
+
+## 7 ¿Qué malos olores suele haber en suites de tests? Dé 3 ejemplos (naming, duplicación, asserts débiles, mocks frágiles, etc.).
+
+## 8 ¿Cómo trazará criterios de aceptación ↔ tests? Incluya un mini ejemplo de tabla con 2 filas.
+
+## 9 ¿Por qué no perseguir 100% de cobertura a toda costa? Mencione
