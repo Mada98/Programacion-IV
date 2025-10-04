@@ -53,6 +53,20 @@ export function makeActcRouter(service: ACTC) {
         }
     })
 
+    router.put('/:id', (req, res) => {
+        try{
+            const { activo } = req.body
+            const id = Number(req.params.id)
+            const valor = service.setActivo(id, activo)
+            if(valor === false){
+                return res.status(404).json({error: 'Error: no existe un piloto con ese ID'})
+            }
+            return res.status(200).json({message: 'Estado del piloto modificado'})
+        }catch(error){
+            return res.status(400).json({ error: 'Error al modificar estado del piloto' })
+        }
+    })
+
     router.delete('/:id', (req, res) => {
         try{
             const valor = service.deletePiloto(Number(req.params.id))
