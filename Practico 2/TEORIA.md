@@ -91,7 +91,9 @@ test('Creacion de libro',()=>{
 
 ## 8- ¿Cómo trazará criterios de aceptación ↔ tests? Incluya un mini ejemplo de tabla con 2 filas.
 
+Se traza cada **criterio de aceptacion** a uno o varios test especificos, se hacen con una tabla de trazabilidad, donde por cada CA o ERR se indica: **precondicion**, **input**, **accion**, **resultado esperado** y **test asociado**.
 
+![Tabla](imagenes/tabla.png)
 
 ## 9- ¿Por qué no perseguir 100% de cobertura a toda costa? Mencione
 
