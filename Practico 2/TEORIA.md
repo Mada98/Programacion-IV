@@ -50,11 +50,48 @@ Tanto **Parse()** como **safeParse()** son usados para validar datos ocn un esqu
 
 ## 7- ¿Qué malos olores suele haber en suites de tests? Dé 3 ejemplos (naming, duplicación, asserts débiles, mocks frágiles, etc.).
 
-//Completo mañana @Rama
+**Duplicacion**: repeticion de codigo
+
+Ej: La creaciond de los libros se repite en ambos test.
+
+```
+service.create('libro 1', 'autor 1', 2000)
+service.create('libro 1', 'autor 1', 2001)
+const libros = service.list();
+expect(libros).toHaveLength(2);
+```
+```
+service.create('libro 1', 'autor 1', 2000)
+service.create('libro 1', 'autor 1', 2001)
+const todosLibros = service.list();
+expect(todosLibros[0].titulo).toBe('libro 1');
+expect(todosLibros[0].titulo).toBe('libro 1');
+```
+
+**Naming**: Usar nombres pocos claros en el test
+
+Ej: El nombre 'test1' no indica que se esta testeando
+
+```
+test('test1'() => {
+    const libro = service.create('Harry Potter', 1990);
+    expect(libro.titulo).toBe('Harry Potter');
+})
+```
+**Asserts debiles**: Verificacion superficial
+
+Ej: El test pasa aunque los datos no sean correctos
+
+```
+test('Creacion de libro',()=>{
+    const libro = service.create('Harry Potter', 1990);
+    expect(libro).toBeDefined();
+})
+```
 
 ## 8- ¿Cómo trazará criterios de aceptación ↔ tests? Incluya un mini ejemplo de tabla con 2 filas.
 
-//Completo mañana @Rama
+
 
 ## 9- ¿Por qué no perseguir 100% de cobertura a toda costa? Mencione
 
