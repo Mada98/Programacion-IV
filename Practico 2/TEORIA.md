@@ -39,7 +39,14 @@ Tanto **Parse()** como **safeParse()** son usados para validar datos ocn un esqu
 
 ## 6- Dé dos ejemplos de reglas de dominio que deben probarse con tests unitarios (no sólo validación de entrada).
 
-//Completo mañana @Rama
+1. Regla de dominio: No se puede confirmar un pedido si no hay stock del producto seleccionado.
+   
+   Test unitario: comprobar que si el stock es menor a la cantidad seleccionada por el cliente, el pedido no se pueda confirmar.
+
+2. Regla de domino: Al confirmar un pedido, el stock del producto se descuenta automaticamente.
+   
+   Test unitario: Verificar que al confirmar un pedido de 10 unidades, el stock se reduce en 10 unidades.
+
 
 ## 7- ¿Qué malos olores suele haber en suites de tests? Dé 3 ejemplos (naming, duplicación, asserts débiles, mocks frágiles, etc.).
 
