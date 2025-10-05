@@ -27,7 +27,38 @@ Los Dobles de prueba **Spy** a diferencia de los otros utiliza la funcion origin
 
 ## 4- ¿Por qué es útil separar app de server? Muestre (en 8–10 líneas) un ejemplo mínimo con makeApp() y un test de integración con Supertest.
 
-//Completo mañana @Rama
+Separar la app de server permite testear todos los endpoints sin levantar el servidor real. Gracias a esto podemos usar pruebas de integracion asiladas con Supertest.
+
+```
+// src/app.ts
+
+import Server from './server';
+
+export function makeApp() {
+  const server = new Server(3000);
+  return server.app;
+}
+```
+
+```
+// tests/integration/actc.test.ts
+
+import request from 'supertest';
+import { makeApp } from '../../src/app';
+
+describe('POST /actc/pilotos', () => {
+  const app = makeApp();
+
+  it('crea piloto correctamente (201)', async () => {
+    const res = await request(app)
+      .post('/actc/pilotos')
+      .send({ nombre: 'Julian', marca: 'Ford', categoria: 'TC' });
+
+    expect(res.status).toBe(201);
+    expect(res.body).toHaveProperty('id');
+  });
+});
+```
 
 ## 5- Zod: diferencia entre parse y safeParse. ¿Dónde usaría cada uno en una ruta Express y por qué?
 
