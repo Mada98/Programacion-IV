@@ -129,3 +129,7 @@ Se traza cada **criterio de aceptacion** a uno o varios test especificos, se hac
 ## 9- ¿Por qué no perseguir 100% de cobertura a toda costa? Mencione
 
 No es necesario perseguir el 100% de covertura ya que generar pruebas para cada linea de codigo gasta mucho tiempo valioso. Muchas de las pruebas que se escribirian cubirian codigo que nunca falla o es innecesario, sacando tiempo a la generacion de casos de prueba en areas criticas del programa. Lo recomendable es apuntar a un porcentaje mas bajo pero con pruebas mas solidas y enfocadas en la logica del programa.
+
+## 10- Defina y dé un ejemplo de helper/builder para tests
+
+En proceso @Rama
