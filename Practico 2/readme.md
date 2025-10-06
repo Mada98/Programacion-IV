@@ -50,6 +50,10 @@ Tenologias utilizadas:
 - Supertest
 - Zod
 
+## Diagrama de clase
+
+![Diagrama de clase](imagenes/diagrama.png)
+
 ## Evidencia de TDD:
 1. Test basico - Rojo
 2. Implementacion Minima - Verde
