@@ -132,4 +132,30 @@ No es necesario perseguir el 100% de covertura ya que generar pruebas para cada 
 
 ## 10- Defina y dé un ejemplo de helper/builder para tests
 
-En proceso @Rama
+Los helper/builders son funciones reutilizables que son usados para realizar acciones que se repiten en el codigo, esto ayuda a mantener el codigo limpio sin repeticiones, algunas de las funciones que cumplen pueden ser cargar datos genericos a la base de datos, reiniciar el sistema, crear usuarios, etc
+
+En el siguiente ejemplo podemos ver un **Helper** E2E el cual limpia la base de datos antes de crear datos de prueba predefinidos:
+
+```
+import {request, expect} from '@playwright/test';
+
+export async function resetAndSeed(baseURL) {
+  const context = await request.newContext({ baseURL });
+
+  try {
+    const respuestaReset = await context.post('/__test__/reset');
+    if (!respuestaReset.ok()) throw new Error('Error al reiniciar la base de datos');
+
+    const respuestaSeed = await context.post('/__test__/seed');
+    expect(respuestaSeed.status()).toBe(201);
+
+    const datos = await respuestaSeed.json();
+    return datos;
+  } catch (error) {
+    console.error('error de resetAndSeed:', error.message);
+    throw error;
+  } finally {
+    await context. dispose();
+  }
+}
+```
