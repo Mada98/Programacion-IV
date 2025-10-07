@@ -4,7 +4,7 @@
 
 1. Clonar el repositorio
 ```bash
-git clone <URL-DEL-REPOSITORIO>
+git clone https://github.com/Mada98/Programacion-IV.git
 ```
 
 2. Entrar a la carpeta del Practico 2
