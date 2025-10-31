@@ -8,7 +8,11 @@ export function Menu() {
 
     const addProduct = (product:Producto) => {
         setOrder([...order, product])
-    } 
+    }
+    const calcularPrecio = () => {
+        const precio = order.reduce((suma, ord) => suma + ord.price, 0)
+        return precio
+    }
 
     useEffect(() => {
         fetch('/api/menu')
@@ -36,6 +40,7 @@ export function Menu() {
                 ))}
             </ul>
             <h1>Lista de Pedidos</h1>
+            <h2>Total: ${calcularPrecio()}</h2>
             <ul role= 'list'>
                 {order.map((order) => (
                     <li key={order.id}>

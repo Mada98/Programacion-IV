@@ -26,4 +26,18 @@ describe ('App Component', () => {
     const list = screen.getByRole('list')
     expect(list).toHaveTextContent('Cafe')
   })
+
+  it('HU3 - agregar varios productos y calcular total del pedido', async () => {
+    render(<App/>)
+
+    await waitFor(() => {
+      expect(screen.getAllByRole('listitem'))
+    })
+
+    const button = screen.getAllByRole('button', {name: /Agregar/i})
+    fireEvent.click(button[0])
+    fireEvent.click(button[1])
+
+    expect(screen.getByText('Total: $4500')).toBeInTheDocument() 
+  })
 })
