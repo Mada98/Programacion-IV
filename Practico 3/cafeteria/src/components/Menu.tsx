@@ -9,6 +9,11 @@ export function Menu() {
     const addProduct = (product:Producto) => {
         setOrder([...order, product])
     }
+
+    const deleteProduct = (id:string) => {
+        setOrder((prevOrder) => prevOrder.filter((p) => p.id !== id))
+    }
+
     const calcularPrecio = () => {
         const precio = order.reduce((suma, ord) => suma + ord.price, 0)
         return precio
@@ -29,7 +34,6 @@ export function Menu() {
 
     return (
         <div>
-            <h1>Menu de la Cafeteria</h1>
             <ul role = 'listItem'>
                 {menu.map((product) => (
                     <li key = {product.id}>
@@ -46,7 +50,7 @@ export function Menu() {
                     <li key={order.id}>
                         <h2>{order.nombre}</h2>
                         <p>Precio: {order.price}</p>
-                        <button onClick={() => 4}>Eliminar</button>
+                        <button onClick={() => deleteProduct(order.id)}>Eliminar</button>
                     </li>
                 ))}
             </ul>

@@ -40,4 +40,23 @@ describe ('App Component', () => {
 
     expect(screen.getByText('Total: $4500')).toBeInTheDocument() 
   })
+  it('HU4 - eliminar un producto en especifico de la lisat de pedidos', async () => {
+    render(<App/>)
+
+    await waitFor(() => {
+      expect(screen.getAllByRole('listitem'))
+    })
+
+    const button = screen.getAllByRole('button', {name: /Agregar/i})
+    fireEvent.click(button[0])
+    fireEvent.click(button[1])
+    fireEvent.click(button[2])
+
+    const buttonDelete = screen.getAllByRole('button', {name: /Eliminar/i})
+    //Eliminamos el pedido 'Cafe'
+    fireEvent.click(buttonDelete[0])
+
+    const list = screen.getByRole('list')
+    expect(list).not.toHaveTextContent('Cafe')
+  })
 })
