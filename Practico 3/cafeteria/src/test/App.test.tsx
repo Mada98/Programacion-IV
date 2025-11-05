@@ -40,6 +40,7 @@ describe ('App Component', () => {
 
     expect(screen.getByText('Total: $4500')).toBeInTheDocument() 
   })
+
   it('HU4 - eliminar un producto en especifico de la lisat de pedidos', async () => {
     render(<App/>)
 
@@ -58,5 +59,24 @@ describe ('App Component', () => {
 
     const list = screen.getByRole('list')
     expect(list).not.toHaveTextContent('Cafe')
+  })
+  
+  it('HU5 - Enviar pedido al endpoint /api/orders y esperar el mensaje "Pedido Confirmado"', async () => {
+    render(<App/>)
+
+    await waitFor(() => {
+      expect(screen.getAllByRole('listitem'))
+    })
+
+    const button = screen.getAllByRole('button', {name: /Agregar/i})
+    fireEvent.click(button[0])
+    fireEvent.click(button[1])
+
+    const buttonSend = screen.getByRole('button', {name: /Enviar Pedido/i})
+    fireEvent.click(buttonSend)
+
+    await waitFor(() => {
+      expect(screen.getByText(/Pedido Confirmado/i)).toBeInTheDocument()
+    })
   })
 })
