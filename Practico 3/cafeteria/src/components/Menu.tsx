@@ -6,6 +6,7 @@ export function Menu() {
     const [order, setOrder] = useState<Producto[]>([])
     const [loading, setLoading] = useState<boolean | undefined>(undefined)
     const [status, setStatus] = useState<'sending' | 'success' | 'error' | 'idle'>('idle')
+    const [error, setError] = useState<boolean>(false)
 
     const addProduct = (product: Producto) => {
         setOrder([...order, product])
@@ -46,9 +47,10 @@ export function Menu() {
                 setMenu(data)
                 setLoading(false)
             })
+            .catch(() => setError(true))
     }, [])
 
-    if (loading) {
+    if(loading) {
         return <div>Cargando menu</div>
     }
     if(status === 'error'){
@@ -56,6 +58,12 @@ export function Menu() {
     }
     if(status === 'success'){
         return <p>Pedido Confirmado</p>
+    }
+    if(!menu){
+        return <p>Error al cargar el Menu</p>
+    }
+    if(menu.length === 0){
+        return <p>No hay productos disponibles</p>
     }
 
     return (
