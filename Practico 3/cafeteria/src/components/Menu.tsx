@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { type Producto } from '../types/Producto.ts'
+import { ProductoSchema, type Producto } from '../types/Producto.ts'
 
 export function Menu() {
     const [menu, setMenu] = useState<Producto[]>([])
@@ -42,12 +42,18 @@ export function Menu() {
     useEffect(() => {
         setLoading(true)
         fetch('/api/menu')
-            .then((res) => res.json())
+            .then((res) => {
+                return res.json()
+            })
             .then((data) => {
+                const result = ProductoSchema.safeParse(data)
+                if(!result.success){
+                    setError(true)
+                }
                 setMenu(data)
-                setLoading(false)
             })
             .catch(() => setError(true))
+            .finally(() => setLoading(false))
     }, [])
 
     if(loading) {
