@@ -3,8 +3,8 @@ const rateLimit = require('express-rate-limit');
 
 // rate limiter tradicional (express-rate-limit)
 const loginLimiter = rateLimit({
-  windowMs: 15 * 60 * 1000, // 15 minutos
-  max: 5, // máximo 5 intentos por IP en la ventana
+  windowMs: 15 * 60 ,
+  max: 3, // máximo 3 intentos por IP en la ventana
   handler: (req, res) => {
     res.status(429).send('Demasiados intentos. Inténtalo más tarde.');
   }
@@ -12,6 +12,9 @@ const loginLimiter = rateLimit({
 
 // Mapa en memoria para contar intentos por key (username o IP)
 const attempts = new Map();
+
+//constante para contar el numero de intentos por username o ip
+const MAX_ATTEMPTS_BEFORE_CAPTCHA=3
 
 /**
  * Middleware que aplica un delay progresivo según la cantidad de intentos fallidos.
@@ -38,6 +41,18 @@ async function bruteForceDelay(req, res, next) {
 
     data.count += 1;
     data.lastAttempt = now;
+
+    //LOGICA DE CAPTHCA
+    if(data.count > MAX_ATTEMPTS_BEFORE_CAPTCHA){
+        const delayPerAttempt=300;
+        const capDelay=1500;
+        const delay= Math.min(data.count*delayPerAttempt,capDelay);
+        await new Promise((resolve)=>setTimeout(resolve,delay))
+
+        return res.status(400).json({
+            error: 'captcha'
+        })
+    }
 
     // Ajuste para tests: 300 ms por intento, con cap en 1500 ms
     const delayPerAttempt = 300; // <-- reducido para evitar timeouts de Jest

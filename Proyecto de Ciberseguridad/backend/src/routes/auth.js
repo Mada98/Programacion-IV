@@ -6,7 +6,7 @@ const {bruteForceDelay, loginLimiter} = require ('../middleware/bruteForceProtec
 
 
 // Rutas de autenticación
-router.post('/login',bruteForceDelay,loginLimiter, authController.login);
+router.post('/login',loginLimiter,bruteForceDelay, authController.login);
 router.post('/register', authController.register);
 router.post('/auth/verify', authController.verifyToken);
 router.post('/check-username', authController.checkUsername);
