@@ -63,21 +63,32 @@ const verifyToken = (req, res) => {
   }
 };
 
-// VULNERABLE: Blind SQL Injection
+// SEGURO: Blind SQL Injection corregido
 const checkUsername = (req, res) => {
   const { username } = req.body;
-  
-  // VULNERABLE: SQL injection que permite inferir información
-  const query = `SELECT COUNT(*) as count FROM users WHERE username = '${username}'`;
-  
-  db.query(query, (err, results) => {
+
+  // Validación básica del formato de username
+  if (!username || typeof username !== 'string' || username.length < 3 || username.length > 20) {
+    return res.status(400).json({ error: 'Invalid username format' });
+  }
+
+  // SEGURO: Usar prepared statement con placeholder
+  const query = 'SELECT COUNT(*) as count FROM users WHERE username = ?';
+
+  db.query(query, [username], (err, results) => {
     if (err) {
-      // VULNERABLE: Expone errores de SQL
-      return res.status(500).json({ error: err.message });
+      // SEGURO: No exponer detalles del error SQL
+      console.error('Error en checkUsername:', err); // Log interno
+      return res.status(500).json({ error: 'Internal server error' });
     }
-    
+
     const exists = results[0].count > 0;
-    res.json({ exists });
+
+    // Agregar un pequeño delay aleatorio para prevenir timing attacks
+    const randomDelay = Math.random() * 50 + 25; // 25-75ms
+    setTimeout(() => {
+      res.json({ exists });
+    }, randomDelay);
   });
 };
 

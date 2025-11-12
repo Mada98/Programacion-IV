@@ -10,6 +10,15 @@ const loginLimiter = rateLimit({
   }
 });
 
+// Rate limiter específico para check-username (prevenir blind SQL injection por enumeración)
+const checkUsernameLimiter = rateLimit({
+  windowMs: 1 * 60 * 1000, // 1 minuto
+  max: 5, // máximo 5 intentos
+  handler: (req, res) => {
+    res.status(429).json({ error: 'Too many attempts' });
+  }
+});
+
 // Mapa en memoria para contar intentos por key (username o IP)
 const attempts = new Map();
 
@@ -72,5 +81,6 @@ async function bruteForceDelay(req, res, next) {
 
 module.exports = {
   bruteForceDelay,
-  loginLimiter
+  loginLimiter,
+  checkUsernameLimiter
 };
