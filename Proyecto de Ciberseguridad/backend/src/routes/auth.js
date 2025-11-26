@@ -7,7 +7,7 @@ const {bruteForceDelay, loginLimiter, checkUsernameLimiter} = require ('../middl
 
 // Rutas de autenticación
 // Orden importante: bruteForceDelay primero (para CAPTCHA), luego loginLimiter
-router.post('/login', bruteForceDelay, loginLimiter, authController.login);
+router.post('/login', loginLimiter, bruteForceDelay, authController.login);
 router.post('/register', authController.register);
 router.post('/auth/verify', authController.verifyToken);
 router.post('/check-username', checkUsernameLimiter, authController.checkUsername);
