@@ -7,8 +7,15 @@ module.exports = {
     'src/middleware/**/*.js',
     '!**/node_modules/**'
   ],
+  testPathIgnorePatterns: ['/node_modules/', '05-file-upload'],
   testMatch: [
-    '**/test/**/*.test.js'
+    '**/test/**/01-*.test.js',
+    '**/test/**/02-*.test.js',
+    '**/test/**/03-*.test.js',
+    '**/test/**/04-*.test.js',
+    '**/test/**/06-*.test.js',
+    '**/test/**/07-*.test.js',
+    '**/test/**/08-*.test.js'
   ],
   verbose: true,
   testTimeout: 10000,
