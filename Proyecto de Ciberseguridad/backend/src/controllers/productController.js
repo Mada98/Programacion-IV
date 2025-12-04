@@ -8,24 +8,18 @@ const getProducts = (req, res) => {
   if (category) {
     // Detectar caracteres sospechosos típicos de SQL injection
     const suspiciousPatterns = [
-      /'\s*(OR|AND)\s*'?\d*'?\s*=\s*'?\d*'?/i,  // ' OR '1'='1
-      /;\s*(DROP|DELETE|UPDATE|INSERT)/i,        // ; DROP TABLE
-      /UNION\s+SELECT/i,                         // UNION SELECT
-      /--/,                                       // -- comentarios
-      /#/,                                        // # comentarios
-      /\/\*/,                                     // /* comentarios
-      /\bEXEC\b/i,                               // EXEC
-      /\bSLEEP\b/i                               // SLEEP
+      /'\s*(OR|AND)\s*'?\d*'?\s*=\s*'?\d*'?/i,
+      /;\s*(DROP|DELETE|UPDATE|INSERT)/i,
+      /UNION\s+SELECT/i,
+      /--/,
+      /#/,
+      /\/\*/,
+      /\bEXEC\b/i,
+      /\bSLEEP\b/i
     ];
 
     for (const pattern of suspiciousPatterns) {
       if (pattern.test(category)) {
-        console.warn('Intento de SQL injection detectado:', {
-          category,
-          ip: req.ip,
-          timestamp: new Date()
-        });
-        // Devolver array vacío sin error para no revelar información
         return res.json([]);
       }
     }
@@ -43,11 +37,6 @@ const getProducts = (req, res) => {
 
     for (const pattern of suspiciousPatterns) {
       if (pattern.test(search)) {
-        console.warn('Intento de SQL injection detectado en search:', {
-          search,
-          ip: req.ip,
-          timestamp: new Date()
-        });
         return res.json([]);
       }
     }
@@ -55,23 +44,23 @@ const getProducts = (req, res) => {
 
   // SEGURO: Usar placeholders (?) en lugar de concatenación
   let query = 'SELECT * FROM products WHERE 1=1';
-  const params = []; // Array para almacenar los parámetros
+  const params = [];
 
   if (category) {
-    query += ' AND category = ?'; // Placeholder en lugar de concatenación
-    params.push(category);         // Agregar el valor al array
+    query += ' AND category = ?';
+    params.push(category);
   }
 
   if (search) {
-    query += ' AND name LIKE ?';   // Placeholder para LIKE
-    params.push(`%${search}%`);    // El % va en el parámetro, no en el query
+    query += ' AND name LIKE ?';
+    params.push(`%${search}%`);
   }
 
   // Ejecutar query con parámetros separados
   db.query(query, params, (err, results) => {
     if (err) {
-      console.error('Error en getProducts:', err); // Log interno
-      return res.status(500).json({ error: 'Error al buscar productos' }); // No exponer detalles
+      console.error('Error en getProducts:', err);
+      return res.status(500).json({ error: 'Error al buscar productos' });
     }
     res.json(results);
   });
