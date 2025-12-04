@@ -30,7 +30,7 @@ La aplicación incluye una suite completa de tests con Jest que verifican cada v
 ```bash
 cd backend
 npm install
-npm run test:security
+npm run test
 ```
 
 ## 📋 Vulnerabilidades incluidas
