@@ -1,5 +1,7 @@
 # Aplicación Vulnerable - Práctica de Seguridad Web
 
+- [Autores del proyecto](#autores)
+
 Esta aplicación ha sido diseñada específicamente para enseñar sobre vulnerabilidades comunes en aplicaciones web. **NO DEBE SER USADA EN PRODUCCIÓN**.
 
 ## 🚨 ADVERTENCIA
@@ -354,3 +356,10 @@ Este proyecto es con fines educativos. Si encuentras algún problema o tienes su
 ## ⚖️ Licencia
 
 Este proyecto es solo para fines educativos. No debe ser utilizado en entornos de producción.
+
+## Autores
+
+- Mateo Avila Baez
+- Ramiro Gabeiras
+- Lautaro Carrio
+- Gino Robla
